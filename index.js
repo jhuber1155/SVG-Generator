@@ -1,6 +1,7 @@
 const fs = require('fs');
-// const { readFile, writeFile } = require('fs/promises');
+const { readFile, writeFile } = require('fs/promises');
 const inquirer = require('inquirer');
+const SVG = require('./lib/svg');
 
 inquirer
   .prompt([
@@ -28,11 +29,19 @@ inquirer
   ])
     .then((data) =>{
         fs.writeFile("./lib/logo.json", JSON.stringify(data), (err) => {
-            err ? console.error(err) : console.log("Generated logo.svg")})
-        }); 
+            err ? console.error(err) : console.log("Generated logo.json")})
+        })
 
-        // readFile('./lib/logo.json', 'utf-8')
-        // .then((json) => {
-        //   const logoData = JSON.parse(json);
-        //   const logo = 
-        // })
+      .then((SVG) =>{
+        fs.readFile("./lib/svg.js")
+      })
+      .then((svg) =>{
+        return writeFile("./examples/logo.svg");
+      })
+      .then(() => {
+          console.log('Generated logo.svg');
+      })
+      .catch((error) => {
+          console.log(error);
+          console.log('Unable to read svgData')
+      });

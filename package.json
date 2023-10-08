@@ -8,7 +8,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "jest svg.test.js"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
