@@ -1,4 +1,5 @@
 const fs = require('fs');
+// const { readFile, writeFile } = require('fs/promises');
 const inquirer = require('inquirer');
 
 inquirer
@@ -26,8 +27,12 @@ inquirer
     },
   ])
     .then((data) =>{
-        fs.writeFile("./examples/logo.svg", JSON.stringify(data), (err) => {
+        fs.writeFile("./lib/logo.json", JSON.stringify(data), (err) => {
             err ? console.error(err) : console.log("Generated logo.svg")})
         }); 
 
-        module.exports = Index;
+        // readFile('./lib/logo.json', 'utf-8')
+        // .then((json) => {
+        //   const logoData = JSON.parse(json);
+        //   const logo = 
+        // })
