@@ -28,20 +28,39 @@ inquirer
     },
   ])
     .then((data) =>{
-        fs.writeFile("./lib/logo.json", JSON.stringify(data), (err) => {
-            err ? console.error(err) : console.log("Generated logo.json")})
-        })
+      fs.writeFile("./lib/logo.json", JSON.stringify(data), (err) => {
+        err ? console.error(err) : console.log("Generated logo.json")})
+    })
+    .then(() => {              ///??????? need to put something in parenthasis
+    const svg = svg.render();
+    return writeFile('./examples/logo.svg', svg);
+    })
+    .then(() => {
+      console.log('Generated logo.svg')
+    })
+    .catch((error) => {
+      console.log(error);
+      console.log('Unable to generate logo.svg');
+    });
 
-      .then((SVG) =>{
-        fs.readFile("./lib/svg.js")
-      })
-      .then((svg) =>{
-        return writeFile("./examples/logo.svg");
-      })
-      .then(() => {
-          console.log('Generated logo.svg');
-      })
-      .catch((error) => {
-          console.log(error);
-          console.log('Unable to read svgData')
-      });
+   
+  
+  
+  // .then((data) =>{
+    //     fs.writeFile("./lib/logo.json", JSON.stringify(data), (err) => {
+    //         err ? console.error(err) : console.log("Generated logo.json")})
+    //     })
+
+    //   .then((SVG) =>{
+    //     fs.readFile("./lib/svg.js")
+    //   })
+    //   .then((svg) =>{
+    //     return writeFile("./examples/logo.svg");
+    //   })
+    //   .then(() => {
+    //       console.log('Generated logo.svg');
+    //   })
+    //   .catch((error) => {
+    //       console.log(error);
+    //       console.log('Unable to read svgData')
+    //   });
