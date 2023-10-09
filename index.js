@@ -18,7 +18,7 @@ inquirer
     {
       type: 'list',
       message: 'What shape would you like to have behind the letters? A triangle, circle, or square?',
-      choices: ['Triangle', 'Circle', 'Square'],
+      choices: ['triangle', 'circle', 'square'],
       name: 'setShape',
     },
     {
@@ -27,12 +27,8 @@ inquirer
         name: 'setColor',
     },
   ])
-    .then((data) =>{
-      fs.writeFile("./lib/logo.json", JSON.stringify(data), (err) => {
-        err ? console.error(err) : console.log("Generated logo.json")})
-    })
-    .then(() => {              ///??????? need to put something in parenthasis
-    const svg = svg.render();
+    .then((data) => {              
+    const svg = new SVG
     return writeFile('./examples/logo.svg', svg);
     })
     .then(() => {
