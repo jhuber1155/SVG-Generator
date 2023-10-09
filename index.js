@@ -24,7 +24,7 @@ inquirer
     {
         type: 'input',
         message: 'What color would you like to make the background shape?',
-        name: 'setColor',
+        name: 'fillColor',
     },
   ])
     .then((data) => {              
