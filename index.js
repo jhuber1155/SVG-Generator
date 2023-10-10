@@ -1,4 +1,3 @@
-const fs = require('fs');
 const { readFile, writeFile } = require('fs/promises');
 const inquirer = require('inquirer');
 const SVG = require('./lib/svg');
@@ -27,21 +26,35 @@ inquirer
         name: 'fillColor',
     },
   ])
-    .then((data) => {              
-    const svg = new SVG (
+  .then((data) => {
+    return writeFile('./lib/logo.json', JSON.stringify(data))
+      .then(() => {
+        console.log('Generated logo.json');
+        return data;
+      })
+      .catch((err) => {
+        console.error('Error writing logo.json:', err);
+        throw err;
+      });
+  })
+  .then((data) => {
+    const svg = new SVG(
       data.text,
       data.textColor,
       data.shape,
-      data.fillColor,
+      data.fillColor
     );
-    expectedSvg = svg.render();
-    return writeFile('./examples/logo.svg', svg);
-    })
-    .then(() => {
-      console.log('Generated logo.svg')
-    })
-    .catch((error) => {
-      console.log(error);
-      console.log('Unable to generate logo.svg');
-    });
+    const generatedSvg = svg.render();
 
+    return writeFile('./examples/logo.svg', generatedSvg)
+      .then(() => {
+        console.log('Generated logo.svg');
+      })
+      .catch((err) => {
+        console.error('Error writing logo.svg:', err);
+        throw err;
+      });
+  })
+  .catch((err) => {
+    console.error('An error occurred:', err);
+  });
