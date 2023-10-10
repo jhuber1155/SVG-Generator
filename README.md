@@ -18,5 +18,7 @@ Open the file marked index.js in your preferred code editor and then right click
 
 I would like to thank the instructors and students of the UCLA bootcamp as well as the the X-pert learner program which the bootcamp provides. With their help I was able to generate the code you see in this repository.
 
+## Link
 
+Here is the link for the video: https://drive.google.com/file/d/1bcm9qisrzzojJ5sZfq04QSlzU1cLmJWs/view
 
