@@ -2,7 +2,7 @@ const { readFile, writeFile } = require('fs/promises');
 const inquirer = require('inquirer');
 const SVG = require('./lib/svg');
 
-inquirer
+inquirer //program used to help us ask the user questions about how they want their logo designed.
   .prompt([
     {
       type: 'input',
@@ -26,35 +26,35 @@ inquirer
         name: 'fillColor',
     },
   ])
-  .then((data) => {
-    return writeFile('./lib/logo.json', JSON.stringify(data))
+  .then((data) => {//takes the data from the user input
+    return writeFile('./lib/logo.json', JSON.stringify(data))//stringifies that data and creates a file called logo.json in the lib folder.
       .then(() => {
-        console.log('Generated logo.json');
-        return data;
+        console.log('Generated logo.json');//console logs that a file was created
+        return data;//returns the data so it can be used further down the promise chain
       })
       .catch((err) => {
-        console.error('Error writing logo.json:', err);
+        console.error('Error writing logo.json:', err);//console logs an error if the logo.json isnt written
         throw err;
       });
   })
-  .then((data) => {
+  .then((data) => {//takes the user input data and creates a new class SVG
     const svg = new SVG(
       data.text,
       data.textColor,
       data.shape,
       data.fillColor
     );
-    const generatedSvg = svg.render();
+    const expectedSvg = svg.render(); //takes the data from the SVG.js file and renders it into a .svg compatable data
 
-    return writeFile('./examples/logo.svg', generatedSvg)
+    return writeFile('./examples/logo.svg', expectedSvg) //this writes the svg file from the previous render
       .then(() => {
-        console.log('Generated logo.svg');
+        console.log('Generated logo.svg');//console logs that an svg file of your logo was created.
       })
       .catch((err) => {
         console.error('Error writing logo.svg:', err);
-        throw err;
+        throw err;//a catch to go with the promise, throwing an error if it doesnt write the .svg file
       });
   })
   .catch((err) => {
-    console.error('An error occurred:', err);
+    console.error('An error occurred:', err);//a catch all error to go with the first promise in case something goes wrong
   });
