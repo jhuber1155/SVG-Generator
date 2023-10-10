@@ -19,7 +19,7 @@ inquirer
       type: 'list',
       message: 'What shape would you like to have behind the letters? A triangle, circle, or square?',
       choices: ['triangle', 'circle', 'square'],
-      name: 'setShape',
+      name: 'shape',
     },
     {
         type: 'input',
@@ -28,7 +28,13 @@ inquirer
     },
   ])
     .then((data) => {              
-    const svg = new SVG
+    const svg = new SVG (
+      data.text,
+      data.textColor,
+      data.shape,
+      data.fillColor,
+    );
+    expectedSvg = svg.render();
     return writeFile('./examples/logo.svg', svg);
     })
     .then(() => {
@@ -39,24 +45,3 @@ inquirer
       console.log('Unable to generate logo.svg');
     });
 
-   
-  
-  
-  // .then((data) =>{
-    //     fs.writeFile("./lib/logo.json", JSON.stringify(data), (err) => {
-    //         err ? console.error(err) : console.log("Generated logo.json")})
-    //     })
-
-    //   .then((SVG) =>{
-    //     fs.readFile("./lib/svg.js")
-    //   })
-    //   .then((svg) =>{
-    //     return writeFile("./examples/logo.svg");
-    //   })
-    //   .then(() => {
-    //       console.log('Generated logo.svg');
-    //   })
-    //   .catch((error) => {
-    //       console.log(error);
-    //       console.log('Unable to read svgData')
-    //   });
