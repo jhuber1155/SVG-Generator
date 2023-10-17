@@ -1,6 +1,7 @@
 const { readFile, writeFile } = require('fs/promises');
 const inquirer = require('inquirer');
 const SVG = require('./lib/svg');
+const { Shapes, Square, Triangle, Circle } = require("./lib/shapes");
 
 inquirer //program used to help us ask the user questions about how they want their logo designed.
   .prompt([
@@ -38,12 +39,21 @@ inquirer //program used to help us ask the user questions about how they want th
       });
   })
   .then((data) => {//takes the user input data and creates a new class SVG
-    const svg = new SVG(
-      data.text,
-      data.textColor,
-      data.shape,
-      data.fillColor
-    );
+    const svg = new SVG();
+    svg.setText(data.text, data.textColor)
+    if(data.shape === "square"){
+      const square = new Square()
+      square.setColor(data.fillColor)
+      svg.setShape(square);
+    }else if(data.shape === "circle"){
+      const circle = new Circle()
+      circle.setColor(data.fillColor)
+      svg.setShape(circle);
+    }else if(data.shape === "triangle"){
+      const triangle = new Triangle()
+      triangle.setColor(data.fillColor)
+      svg.setShape(triangle);
+    }
     const expectedSvg = svg.render(); //takes the data from the SVG.js file and renders it into a .svg compatable data
 
     return writeFile('./examples/logo.svg', expectedSvg) //this writes the svg file from the previous render
