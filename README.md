@@ -20,5 +20,5 @@ I would like to thank the instructors and students of the UCLA bootcamp as well 
 
 ## Link
 
-Here is the link for the video: https://drive.google.com/file/d/1bcm9qisrzzojJ5sZfq04QSlzU1cLmJWs/view
+Here is the link for the video: https://drive.google.com/file/d/1bhezclr6JoS-tR0YHKF_COruIJ3H8RjQ/view
 
